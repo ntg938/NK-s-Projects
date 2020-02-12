@@ -88,6 +88,44 @@ None
 Our model has 1 embedding, 1 LSTM and 1 dense layer. Total parameters to be trained in total are 213 333.
 
 #Train our Model
-Now we are ready to train our model. We would need to compile the model by specifying the loss function and optimizer that we would like to use while training, together with any evaluation metrics we would like to  measure.
+Now we are ready to train our model. We would need to compile the model by specifying the loss function and optimizer that we would like to use while training, together with any evaluation metrics we would like to  measure, such as accuracy. This is shown below.
+
+model.compile(optimizer='adam',
+loss='binary_crossentropy',
+metrics=['accuracy'])
+         
+Once the compile process has been completed, we can now start training our model. Note that there are two important training parameters that we have to specify , namely batch size and number of training epochs. Together with our model architecture these parameters determine the total training time.
+
+in: batch_size = 64
+    num_epochs = 3
+    X_valid, y_valid = X_train[:batch_size], y_train[:batch_size]
+    X_train2, y_train2 = X_train[batch_size:], y_train[batch_size:]
+    model.fit(X_train2, y_train2, validation_data=(X_valid, y_valid), batch_size=batch_size, epochs=num_epochs)
+    
+out:
+Train on 24936 samples, validate on 64 samples
+Epoch 1/3
+24936/24936 [==============================] - 292s 12ms/step - loss: 0.4916 - acc: 0.7667 - val_loss: 0.2637 - val_acc: 0.9375
+Epoch 2/3
+24936/24936 [==============================] - 298s 12ms/step - loss: 0.3036 - acc: 0.8777 - val_loss: 0.2936 - val_acc: 0.8906
+Epoch 3/3
+24936/24936 [==============================] - 299s 12ms/step - loss: 0.4416 - acc: 0.7976 - val_loss: 0.3196 - val_acc: 0.8906
+<keras.callbacks.History at 0x7f709fddee10>
+
+
+#Test the Model
+Now that our model has been trained, we can go ahead and test it on data it hasnt been as yet, and see how well it perfomrs there.
+
+in: scores = model.evaluate(X_test, y_test, verbose=0)
+    print('Test accuracy:', scores[1])
+    
+out:
+Test accuracy: 0.86288
+
+There we go, our model has a accuracy rate of 0.86288 on our unseen data, we can continue playing around with different parameters and layers to see whether we can improve the score, but the above score is no too bad.
+
+
+
+
 
 
