@@ -47,7 +47,7 @@ out: -review with words---
 ---label---
 1
 
-#Preprocessing the data
+# Preprocessing the data
 
 For our RNN to be able get this data fed into it, needs to have same length of input documents. In this regard the maximum review length will be limited to max_words and we will pad the shorter reviews, with 0, using the pad_sequence() function. Max_words will be set to 500 for this instance.
 
@@ -87,7 +87,8 @@ None
 
 Our model has 1 embedding, 1 LSTM and 1 dense layer. Total parameters to be trained in total are 213 333.
 
-#Train our Model
+# Train the Model
+
 Now we are ready to train our model. We would need to compile the model by specifying the loss function and optimizer that we would like to use while training, together with any evaluation metrics we would like to  measure, such as accuracy. This is shown below.
 
 model.compile(optimizer='adam',
@@ -113,7 +114,8 @@ Epoch 3/3
 <keras.callbacks.History at 0x7f709fddee10>
 
 
-#Test the Model
+# Test the model
+
 Now that our model has been trained, we can go ahead and test it on data it hasnt been as yet, and see how well it perfomrs there.
 
 in: scores = model.evaluate(X_test, y_test, verbose=0)
