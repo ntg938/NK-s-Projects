@@ -30,6 +30,7 @@ We begin by splitting our training and testing data, and setting the number of w
 in: (X_train, y_train), (X_test, y_test) = imdb.load_data(num_words = 5000)
 print('Loaded dataset with {} training samples, {} test samples'.format(len(X_train), len(X_test)))
 
+
 out: Loaded dataset with 25000 training samples, 25000 test samples
 
 To see the words mapped to these intergers you run the following commands.
@@ -127,7 +128,7 @@ Test accuracy: 0.86288
 There we go, our model has a accuracy rate of 0.86288 on our unseen data, we can continue playing around with different parameters and layers to see whether we can improve the score, but the above score is no too bad.
 
 
-
+external resources: HyperionDev and https://towardsdatascience.com/a-beginners-guide-on-sentiment-analysis-with-rnn-9e100627c02e
 
 
 
