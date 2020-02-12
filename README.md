@@ -49,4 +49,45 @@ out: -review with words---
 
 #Preprocessing the data
 
-For our RNN to be able get this data fed into it, needs to have same length of input documents. In this regard the maximum review length will be limited to max_words and we will pad the shorter reviews, with 0, using the pad_sequence() function.
+For our RNN to be able get this data fed into it, needs to have same length of input documents. In this regard the maximum review length will be limited to max_words and we will pad the shorter reviews, with 0, using the pad_sequence() function. Max_words will be set to 500 for this instance.
+
+max_words = 500
+X_train = sequence.pad_sequences(X_train, maxlen=max_words)
+X_test = sequence.pad_sequences(X_test, maxlen=max_words)
+
+#Build the Model
+ We can now commence with building our model. For the sake of this project some layers have been inputted for us from Keras, but we can use other layers as well.
+ 
+ Input will be our maximum length = max_words which in our case is 500. Out  will be in a form of a binary sentiment label which could either be a 0 or 1.
+ 
+ Below in the model example.
+ 
+ in: embedding_size=32
+     model=Sequential()
+     model.add(Embedding(5001, embedding_size, input_length=max_words))
+     model.add(LSTM(100))
+     model.add(Dense(1, activation='sigmoid'))
+     print(model.summary())
+     
+ out: Model: "sequential_2"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_1 (Embedding)      (None, 500, 32)           160032    
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 100)               53200     
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 101       
+=================================================================
+Total params: 213,333
+Trainable params: 213,333
+Non-trainable params: 0
+_________________________________________________________________
+None
+
+Our model has 1 embedding, 1 LSTM and 1 dense layer. Total parameters to be trained in total are 213 333.
+
+#Train our Model
+Now we are ready to train our model. We would need to compile the model by specifying the loss function and optimizer that we would like to use while training, together with any evaluation metrics we would like to  measure.
+
+
